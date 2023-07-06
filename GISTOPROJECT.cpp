@@ -8,6 +8,7 @@
 #include <set>
 #include <stack>
 #include <deque>
+#include "histogram.h"
 
 using namespace std;
 
@@ -18,25 +19,6 @@ typedef pair<ll, ll> pll;
 typedef pair<string, ll> psl;
 typedef pair<char, string> pcs;
 //=====================================
-void find_minmax(const vector<double>& numbers, double& min, double& max)
-{
-	min = numbers[0];
-	max = numbers[0];
-
-	for (double x : numbers)
-	{
-		if (x < min)
-		{
-			min = x;
-		}
-
-		else if (x > max)
-		{
-			max = x;
-		}
-	}
-}
-
 vector<double> input_numbers(size_t count) 
 {
 	vector<double> result(count);
