@@ -18,36 +18,13 @@ typedef pair<ll, ll> pll;
 typedef pair<string, ll> psl;
 typedef pair<char, string> pcs;
 
+const size_t SCREEN_WIDTH = 80;
+const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
 
-int main()
+void find_minmax(vector<double>& numbers, double& min, double& max)
 {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
-	cout.precision(10);
-
-	const size_t SCREEN_WIDTH = 80;
-	const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
-
-	size_t number_count;
-
-	cerr << "Enter number count: ";
-	cin >> number_count;
-
-	vector<double> numbers(number_count, 0);
-
-	for (size_t i = 0; i < number_count; i++)
-	{
-		cin >> numbers[i];
-	}
-
-	size_t bin_count;
-	cin >> bin_count;
-
-	vector<size_t> bins(bin_count);
-
-	double min = numbers[0];
-	double max = numbers[0];
+	min = numbers[0];
+	max = numbers[0];
 
 	for (double x : numbers)
 	{
@@ -61,6 +38,41 @@ int main()
 			max = x;
 		}
 	}
+}
+
+vector<double> input_numbers(size_t count) 
+{
+	vector<double> result(count);
+	for (size_t i = 0; i < count; i++) 
+	{
+		cin >> result[i];
+	}
+	return result;
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	cout.precision(10);
+
+
+	size_t number_count;
+
+	cerr << "Enter number count: ";
+	cin >> number_count;
+
+	const auto numbers = input_numbers(number_count);
+
+	size_t bin_count;
+	cin >> bin_count;
+
+	vector<size_t> bins(bin_count);
+
+	double min, max;
+
+	find_minmax(numbers, min, max);
 
 	double bin_size = (max - min) / bin_count;
 
