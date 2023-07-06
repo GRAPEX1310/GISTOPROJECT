@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <vector>
 #include "histogram.h"
 #include "SVGISTOHELPER.h"
 
@@ -41,24 +39,42 @@ void show_histogram_svg(const vector<size_t>& bins)
 	const auto TEXT_WIDTH = 50;
 	const auto BIN_HEIGHT = 30;
 	const auto BLOCK_WIDTH = 10;
+	const auto SCREEN_WIDTH = 80;
+	const auto MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
+	const auto bin_count = bins.size();
+
+	size_t max_count = 0;
+
+	for (size_t i = 0; i < bin_count; i++)
+	{
+		max_count = max(max_count, bins[i]);
+	}
 
 	svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
 
 	double top = 0;
 
-	size_t max_count = 0;
-
-	for (size_t i = 0; i < bins.size(); i++)
-	{
-		if (bins[i] > max_count) max_count = bins[i];
-	}
-
 	for (size_t bin : bins)
 	{
-		const double bin_width = BLOCK_WIDTH * bin;
 		const double fill_opacity = ((static_cast<double>(bin)) / max_count);
+		
+		size_t height;
+
+		if (max_count > MAX_ASTERISK)
+		{
+			height = MAX_ASTERISK * (static_cast<double>(bin) / max_count);
+		}
+
+		else
+		{
+			height = bin;
+		}
+
+		const double bin_width = BLOCK_WIDTH * height;
+
 		svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
 		svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, fill_opacity, "black", "green");
+		
 		top += BIN_HEIGHT;
 
 	}

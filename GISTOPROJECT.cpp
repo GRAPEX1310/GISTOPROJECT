@@ -33,8 +33,6 @@ vector<double> input_numbers(size_t count)
 
 vector<size_t> make_histogram(const vector<double>& numbers, size_t bin_count)
 {
-	const size_t SCREEN_WIDTH = 80;
-	const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
 
 	vector<size_t> bins(bin_count);
 
@@ -67,15 +65,33 @@ vector<size_t> make_histogram(const vector<double>& numbers, size_t bin_count)
 		}
 	}
 
+	return bins;
+}
+
+void show_histogram_text(const vector<size_t>& bins)
+{
+	const size_t SCREEN_WIDTH = 80;
+	const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
+
+	const size_t bin_count = bins.size();
+
 	size_t max_count = 0;
 
 	for (size_t i = 0; i < bin_count; i++)
 	{
-		if (bins[i] > max_count) max_count = bins[i];
+		max_count = max(max_count, bins[i]);
 	}
 
 	for (size_t i = 0; i < bin_count; i++)
 	{
+		if (bins[i] < 100)
+		{
+			cout << ' ';
+			if (bins[i] < 10) cout << ' ';
+		}
+
+		cout << bins[i] << '|';
+
 		size_t height;
 
 		if (max_count > MAX_ASTERISK)
@@ -88,28 +104,7 @@ vector<size_t> make_histogram(const vector<double>& numbers, size_t bin_count)
 			height = bins[i];
 		}
 
-		bins[i] = height;
-	}
-
-	return bins;
-}
-
-void show_histogram_text(const vector<size_t>& bins)
-{
-
-	const size_t bin_count = bins.size();
-
-	for (size_t i = 0; i < bin_count; i++)
-	{
-		if (bins[i] < 100)
-		{
-			cout << ' ';
-			if (bins[i] < 10) cout << ' ';
-		}
-
-		cout << bins[i] << '|';
-
-		for (size_t j = 0; j < bins[i]; j++)
+		for (size_t j = 0; j < height; j++)
 		{
 			cout << '*';
 		}
