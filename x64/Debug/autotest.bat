@@ -1,0 +1,1 @@
+GISTOPROJECT.exe < gista.input.txt > gista.output.svg
