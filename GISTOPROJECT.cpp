@@ -18,10 +18,7 @@ typedef pair<ll, ll> pll;
 typedef pair<string, ll> psl;
 typedef pair<char, string> pcs;
 
-const size_t SCREEN_WIDTH = 80;
-const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
-
-void find_minmax(vector<double>& numbers, double& min, double& max)
+void find_minmax(const vector<double>& numbers, double& min, double& max)
 {
 	min = numbers[0];
 	max = numbers[0];
@@ -50,29 +47,14 @@ vector<double> input_numbers(size_t count)
 	return result;
 }
 
-int main()
+vector<size_t> make_histogram(const vector<double>& numbers, size_t bin_count)
 {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
-	cout.precision(10);
-
-
-	size_t number_count;
-
-	cerr << "Enter number count: ";
-	cin >> number_count;
-
-	const auto numbers = input_numbers(number_count);
-
-	size_t bin_count;
-	cin >> bin_count;
-
 	vector<size_t> bins(bin_count);
 
 	double min, max;
-
 	find_minmax(numbers, min, max);
+
+	size_t number_count = numbers.size();
 
 	double bin_size = (max - min) / bin_count;
 
@@ -97,9 +79,17 @@ int main()
 			bins[bin_count - 1]++;
 		}
 	}
+	return bins;
+}
 
+void show_histogram_text(const vector<size_t>& bins)
+{
+	const size_t SCREEN_WIDTH = 80;
+	const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
+	const size_t bin_count = bins.size();
 
 	size_t max_count = 0;
+
 	for (size_t i = 0; i < bins.size(); i++)
 	{
 		if (bins[i] > max_count) max_count = bins[i];
@@ -134,4 +124,24 @@ int main()
 
 		cout << '\n';
 	}
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	cout.precision(10);
+
+	size_t number_count;
+	cin >> number_count;
+
+	const auto numbers = input_numbers(number_count);
+
+	size_t bin_count;
+	cin >> bin_count;
+
+	const auto bins = make_histogram(numbers, bin_count);
+
+	show_histogram_text(bins);
 }
