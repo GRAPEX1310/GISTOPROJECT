@@ -1,8 +1,5 @@
-﻿  GISTOPROJECT.cpp
-C:\Users\sasha\Рабочий стол\GP\GISTOPROJECT\GISTOPROJECT.cpp(99,26): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
-  SVGISTOHELPER.cpp
+﻿  SVGISTOHELPER.cpp
 C:\Users\sasha\Рабочий стол\GP\GISTOPROJECT\SVGISTOHELPER.cpp(65,26): warning C4244: '=': conversion from 'double' to 'size_t', possible loss of data
 C:\Users\sasha\Рабочий стол\GP\GISTOPROJECT\SVGISTOHELPER.cpp(73,40): warning C4244: 'initializing': conversion from 'size_t' to 'double', possible loss of data
 C:\Users\sasha\Рабочий стол\GP\GISTOPROJECT\SVGISTOHELPER.cpp(73,26): warning C4244: 'initializing': conversion from 'size_t' to 'const double', possible loss of data
-  Generating Code...
   GISTOPROJECT.vcxproj -> C:\Users\sasha\Рабочий стол\GP\GISTOPROJECT\x64\Debug\GISTOPROJECT.exe
